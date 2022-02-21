@@ -1,10 +1,19 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, colors, Typography } from '@mui/material';
 
 const Header = () => {
   return (
-    <Box pt={1} data-testid="header">
-      Header
+    <Box
+      mb={2}
+      sx={{ backgroundColor: colors.blue[400] }}
+      pt={3}
+      pb={3}
+      pl={2}
+      data-testid="header"
+    >
+      <Typography variant="h5" fontWeight="bold">
+        Dev Blog
+      </Typography>
     </Box>
   );
 };

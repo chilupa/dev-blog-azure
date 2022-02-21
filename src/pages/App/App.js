@@ -1,19 +1,21 @@
 import React from 'react';
-import { Container, colors, Typography } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../utils/theme';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from '../Home/Home';
+import Header from '../../components/Header/Header';
+
+const routes = [{ path: '/', element: <Home /> }];
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Container
-        maxWidth="lg"
-        sx={{ height: '100vh', backgroundColor: colors.grey[50] }}
-      >
-        <Typography variant="h4">React App</Typography>
-        <Typography variant="body1">Start building the app.</Typography>
-      </Container>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        {routes.map((props, index) => (
+          <Route key={index} {...props} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   );
 };
 

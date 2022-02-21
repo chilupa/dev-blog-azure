@@ -1,13 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './pages/App/App';
+
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import reportWebVitals from './reportWebVitals';
 
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './utils/theme';
+import App from './pages/App/App';
+
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_GRAPHQL_API_URL,
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
