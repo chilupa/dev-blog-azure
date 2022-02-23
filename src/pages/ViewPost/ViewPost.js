@@ -61,7 +61,7 @@ const ViewPost = () => {
   return (
     <PageLayout>
       <Box mt={2}>
-        <Paper elevation={2} sx={{ height: '80vh' }}>
+        <Paper elevation={2}>
           <Box p={2}>
             <Stack direction="row" spacing={2} justifyContent="space-between">
               <Box display="flex" alignItems="center">

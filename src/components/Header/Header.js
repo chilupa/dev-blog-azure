@@ -17,7 +17,12 @@ const Header = () => {
       display="flex"
       alignItems="center"
     >
-      <Typography variant="h5" fontWeight="bold">
+      <Typography
+        variant="h5"
+        fontWeight="bold"
+        sx={{ cursor: 'pointer' }}
+        onClick={() => navigate('/')}
+      >
         Dev Blog
       </Typography>
       <Box ml="auto" pr={2}>

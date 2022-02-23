@@ -9,6 +9,7 @@ import {
   Stack,
   Avatar,
   LinearProgress,
+  Alert,
 } from '@mui/material';
 import React from 'react';
 import { GET_POSTS } from '../../graphql/queries';
@@ -30,6 +31,14 @@ const Home = () => {
 
   if (error) {
     return <ApiError />;
+  }
+
+  if (data.getPosts.length === 0) {
+    return (
+      <Alert severity="info">
+        No posts yet. Click on "Create Post" to add new posts.
+      </Alert>
+    );
   }
 
   const handleViewPost = (postId) => {

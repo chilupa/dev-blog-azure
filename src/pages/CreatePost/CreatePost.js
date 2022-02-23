@@ -39,7 +39,7 @@ const CreatePost = () => {
       <Box pt={2}>
         <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item lg={12}>
+            <Grid item lg={12} sm={12} xs={12}>
               <TextField
                 fullWidth
                 name="title"
@@ -51,7 +51,7 @@ const CreatePost = () => {
                 helperText={formik.touched.title && formik.errors.title}
               />
             </Grid>
-            <Grid item lg={12}>
+            <Grid item lg={12} sm={12} xs={12}>
               <TextField
                 fullWidth
                 multiline
@@ -70,8 +70,10 @@ const CreatePost = () => {
                 }
               />
             </Grid>
-            <Grid item lg={12}>
-              <Button type="submit">Post</Button>
+            <Grid item lg={12} sm={12} xs={12}>
+              <Button sx={{ width: 100 }} type="submit">
+                Post
+              </Button>
             </Grid>
           </Grid>
         </form>
