@@ -2,12 +2,43 @@ import { gql } from '@apollo/client';
 
 export const GET_POSTS = gql`
   query GetPosts {
-    posts {
+    getPosts {
+      id
       title
       description
       author
-      postDate
-      tags
+      createdAt
+    }
+  }
+`;
+
+export const GET_POST = gql`
+  query GetSinglePost($id: ID!) {
+    getPost(id: $id) {
+      id
+      title
+      description
+      author
+      createdAt
+    }
+  }
+`;
+
+export const CREATE_POST = gql`
+  mutation CreatePost($title: String!, $description: String!) {
+    createPost(
+      input: {
+        title: $title
+        description: $description
+        createdAt: ""
+        author: "Pavan"
+      }
+    ) {
+      id
+      title
+      description
+      author
+      createdAt
     }
   }
 `;

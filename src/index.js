@@ -9,6 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './utils/theme';
 import App from './pages/App/App';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_API_URL,
@@ -17,11 +19,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

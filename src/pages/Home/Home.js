@@ -14,8 +14,11 @@ import React from 'react';
 import { GET_POSTS } from '../../graphql/queries';
 import { deepOrange } from '@mui/material/colors';
 import PageLayout from '../../components/PageLayout/PageLayout';
+import ApiError from '../../components/ApiError/ApiError';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_POSTS);
 
   if (loading)
@@ -25,45 +28,50 @@ const Home = () => {
       </Box>
     );
 
-  if (error)
-    return (
-      <PageLayout>
-        <Typography variant="body1">Oops! Something went wrong</Typography>
-      </PageLayout>
-    );
+  if (error) {
+    return <ApiError />;
+  }
+
+  const handleViewPost = (postId) => {
+    navigate(`/view/${postId}`);
+  };
 
   return (
     <PageLayout>
-      <Grid container spacing={2}>
-        {data?.posts.map(({ title, description, postDate, author }, index) => (
-          <Grid item lg={12} key={index}>
-            <Card>
-              <CardActionArea>
-                <CardContent>
-                  <Stack direction="row" spacing={2}>
-                    <Avatar sx={{ bgcolor: deepOrange[500] }}>
-                      {author.substring(0, 1)}
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body1">{author}</Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {postDate}
+      <Box pt={2}>
+        <Grid container spacing={2}>
+          {data?.getPosts.map(
+            ({ title, description, createdAt, author, id }, index) => (
+              <Grid item lg={12} key={index}>
+                <Card>
+                  <CardActionArea onClick={() => handleViewPost(id)}>
+                    <CardContent>
+                      <Stack direction="row" spacing={2}>
+                        <Avatar sx={{ bgcolor: deepOrange[500] }}>
+                          {author.substring(0, 1)}
+                        </Avatar>
+                        <Box>
+                          <Typography variant="body1">{author}</Typography>
+                          <Typography variant="body2" color="textSecondary">
+                            {createdAt}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                      <Typography pt={1} variant="h6">
+                        {title}
                       </Typography>
-                    </Box>
-                  </Stack>
-                  <Typography pt={1} variant="h6">
-                    {title}
-                  </Typography>
 
-                  <Typography pt={1} variant="body1" color="text.secondary">
-                    {description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                      <Typography pt={1} variant="body1" color="text.secondary">
+                        {description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ),
+          )}
+        </Grid>
+      </Box>
     </PageLayout>
   );
 };
