@@ -25,13 +25,18 @@ export const GET_POST = gql`
 `;
 
 export const CREATE_POST = gql`
-  mutation CreatePost($title: String!, $description: String!) {
+  mutation CreatePost(
+    $title: String!
+    $description: String!
+    $createdAt: String!
+    $author: String!
+  ) {
     createPost(
       input: {
         title: $title
         description: $description
-        createdAt: ""
-        author: "Pavan"
+        createdAt: $createdAt
+        author: $author
       }
     ) {
       id

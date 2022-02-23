@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { Grid, TextField, Box, Button } from '@mui/material';
+import { format } from 'date-fns';
 import { useFormik } from 'formik';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +22,14 @@ const CreatePost = () => {
     },
     validationSchema: createPostSchema,
     onSubmit: (values) => {
+      const createPostVariables = {
+        title: values.title,
+        description: values.description,
+        createdAt: format(new Date(), 'MMM dd, yyyy'),
+        author: 'John Snow',
+      };
       createPost({
-        variables: values,
+        variables: createPostVariables,
       });
       if (!loading) {
         navigate('/');
