@@ -2,7 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+} from '@apollo/client';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -13,7 +18,10 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_GRAPHQL_API_URL,
+  link: new HttpLink({
+    uri: 'https://posts-graphql.azurewebsites.net/api/posts',
+    fetch,
+  }),
   cache: new InMemoryCache(),
 });
 
