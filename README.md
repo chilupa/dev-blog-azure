@@ -12,6 +12,6 @@ npm run start
 
 ## Depolyment 🚀
 
-This applicated is hosted using Azure's Static Web App.
+This application is hosted using Azure's Static Web App.
 
 Watch it live here - https://brave-hill-0c5adaa10.1.azurestaticapps.net
