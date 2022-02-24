@@ -12,6 +12,7 @@ import {
   Alert,
   Container,
   Paper,
+  useMediaQuery,
 } from '@mui/material';
 import React from 'react';
 import { GET_POSTS } from '../../graphql/queries';
@@ -20,9 +21,12 @@ import ApiError from '../../components/ApiError/ApiError';
 import { useNavigate } from 'react-router-dom';
 import Advertisements from '../../components/Advertisements/Advertisements';
 import MenuList from '../../components/MenuList/MenuList';
+import { useTheme } from '@mui/styles';
 
 const Home = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { loading, error, data } = useQuery(GET_POSTS);
 
   if (loading)
@@ -44,15 +48,17 @@ const Home = () => {
     <Container maxWidth="xl">
       <Box pt={2}>
         <Grid container spacing={2}>
-          <Grid item lg={2}>
-            <MenuList />
-          </Grid>
-          <Grid item lg={7}>
+          {matches && (
+            <Grid item lg={2}>
+              <MenuList />
+            </Grid>
+          )}
+          <Grid item lg={7} sm={12} xs={12}>
             <Grid container spacing={2}>
               {data.getPosts.length > 0 ? (
                 data?.getPosts.map(
                   ({ title, description, createdAt, author, id }, index) => (
-                    <Grid item lg={12} key={index}>
+                    <Grid item lg={12} sm={12} xs={12} key={index}>
                       <Card>
                         <CardActionArea onClick={() => handleViewPost(id)}>
                           <CardContent>
@@ -96,9 +102,11 @@ const Home = () => {
               )}
             </Grid>
           </Grid>
-          <Grid item lg={3}>
-            <Advertisements />
-          </Grid>
+          {matches && (
+            <Grid item lg={3}>
+              <Advertisements />
+            </Grid>
+          )}
         </Grid>
       </Box>
     </Container>
