@@ -51,7 +51,7 @@ const Dashboard = () => {
         {data?.getPosts.map(
           ({ title, description, createdAt, author, id }, index) => (
             <Grid item lg={3} xl={3} key={index}>
-              <Card>
+              <Card sx={{ height: '100%' }}>
                 <CardActionArea onClick={() => handleViewPost(id)}>
                   <CardContent>
                     <Stack direction="row" spacing={2}>
